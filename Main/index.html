@@ -1,39 +1,154 @@
-<html>
-  <head>
-    <title>Hugh Roth</title>
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  </head>
-  <body>
-    <header>
-      <nav>
-      <div style="text-align:center;"><h2>Hugh Roth</h2></div>
-        <ul>
-          <li><a href="file:///E:/NON%20WORK/website/aboutme.pdf">About me</a></li>
-          <li><a href="file:///E:/NON%20WORK/website/Contact.pdf">Contact</a></li>
-          <li><a href="writings.html">Writings</a></li>
-        </ul>
-      </nav>
-      <div class="social-media">
-        <ul>
-            <li><a href="https://www.instagram.com/hrothportfolio" target="_blank">Photography instagram</a></li>
-            <li> <a href="https://www.instagram.com/hughtrothofficial" target="_blank">Personal instagram</a></li>
-            <li> <a href="https://www.youtube.com/@HughTRoth/videos" target="_blank">Youtube channel    </a></li>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Website</title>
+    <style>
+        body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 10px 0;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .nav a {
+        color: #4682B4;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+    }
+
+    .section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.2s ease-in-out;
+        background-color: #E6F3FF; /* Light pink */
+    }
+
+
+    .section.active {
+        opacity: 1;
+    }
+    .content {
+        max-width: 800px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="#about">About Me</a>
+    <a href="#writings">Writings</a>
+    <a href="#portfolio">My Portfolio</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+    <section id="about" class="section">
+      <div class="content">
+          <img src="img/headshot.jpg" alt="Profile Photo" class="profile-photo">
+          <h1>About Me</h1>
+          <p>Hello! My name is Hugh Roth, I am 20 years old and I love Jesus and entrepreneurship.
+             I have a passion for ebangelism and a burden for the lost. Feel free to contact me 
+              about anything whether it be religion, business, or just to chat. Below you will find
+              links to my writings, my portfolio, my social profiles, and my contact information.
+          </p>
       </div>
-    </header>
-    <main>
-      <h1>Welcome to my website</h1>
-      <p class="p13">Links to more of my work coming soon!</p> 
-      <!-- photo column 1 -->
-      <div class="img-container">
-        <img src="img\HGH_4766.jpg" alt="Photo 1">
-        <img src="img\HGH_4003.jpg" alt="Photo 2">
-        <img src="img\HGH_0450.jpg" alt="Photo 3">
-    </div>
-      <!-- photo column 2  -->
-      </main>
-    <footer>
-      <p>Copyright © 2024 Hugh Roth</p>
-    </footer>
-  </body>
-</html>
+  </section>
+    <section id="writings" class="section">
+        <div class="content">
+            <h1>Writings</h1>
+            <p>Here are some of my recent writings:</p>
+            <ul>
+                <li>[Writing 1 Title]</li>
+                <li>[Writing 2 Title]</li>
+                <li>[Writing 3 Title]</li>
+              </ul>
+            </div>
+        </section>
+    
+        <section id="portfolio" class="section">
+            <div class="content">
+                <h1>My Portfolio</h1>
+                <p>Check out some of my projects:</p>
+                <ul>
+                    <li>[Project 1]</li>
+                    <li>[Project 2]</li>
+                    <li>[Project 3]</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+          <div class="content">
+              <h1>Contact</h1>
+              <h2>Get in touch with me</h2>
+          </div>
+      </section>
+    
+        <script>
+           const sections = document.querySelectorAll('.section');
+
+function checkSections() {
+    const windowHeight = window.innerHeight;
+    const scrollPosition = window.scrollY;
+
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionMiddle = sectionTop + sectionHeight / 2;
+        const viewportMiddle = scrollPosition + windowHeight / 2;
+
+        // Calculate distance from section middle to viewport middle
+        const distance = Math.abs(sectionMiddle - viewportMiddle);
+        
+        // Calculate opacity based on distance
+        let opacity = 1 - (distance / (windowHeight / 2));
+        opacity = Math.max(0, Math.min(1, opacity)); // Clamp between 0 and 1
+
+        section.style.opacity = opacity;
+    });
+}
+
+window.addEventListener('scroll', checkSections);
+window.addEventListener('resize', checkSections);
+
+// Initial check to set initial opacities
+checkSections();
+
+// Smooth scrolling (keep your existing smooth scroll code)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+        </script>
+    </body>
+    </html>

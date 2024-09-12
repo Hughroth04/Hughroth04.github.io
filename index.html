@@ -1,0 +1,278 @@
+<!DO<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+       body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        background-color: #FFE4E1; /* Misty Rose - a lighter pink */
+    }
+
+    .section {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.2s ease-in-out;
+        opacity: 0;  /* Start invisible */
+    }
+
+    .section::before {
+        content: '';
+        position: absolute;
+        top: -50vh;
+        left: 0;
+        right: 0;
+        bottom: -50vh;
+        background: linear-gradient(to bottom, 
+            rgba(255, 182, 193, 0) 0%,
+            rgba(255, 182, 193, 0.5) 50%,
+            rgba(255, 182, 193, 0) 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .section > div {
+        position: relative;
+        z-index: 2;
+    }
+
+
+.section > div {
+    position: relative;
+    z-index: 2;
+}
+
+#home {
+        background-image: url('img/windowstock.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    #services {
+        background-color: #FFB6C1; /* Light pink - original section color */
+    }
+
+    #gallery {
+        background-color: #FFB6C1;
+    }
+       
+        
+    #about-us {
+        background-color: #FFB6C1;
+}
+
+        #services {
+            background-color: #FFB6C1;
+        }
+
+        #gallery {
+            background-color: #FFB6C1;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .gallery-item {
+            display: inline-block;
+            margin: 10px;
+            width: 350px;
+            height: 2px;
+            background-color: #da77e4;
+            background-size: cover;
+            background-position: center;
+        
+        }
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .gallery-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            width: 350px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .nav-bar a {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background-color: rgba(218, 119, 228, 0.7);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .nav-bar a:hover {
+            background-color: rgba(218, 119, 228, 1);
+        }
+        #contact-form {
+        background-color: rgba(173, 216, 230, 0.5); /* Light blue with 50% opacity */
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #contact-form input,
+    #contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    #contact-form textarea {
+        height: 100px;
+        resize: vertical;
+    }
+
+    #contact-form button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #contact-form button:hover {
+        background-color: #45a049;
+    }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="#home">Home</a>
+        <a href="#about-us">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact-us">Contact Us</a>
+    </div>
+    </style>
+</head>
+<body>
+
+    <div id="home" class="section active">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <img src="img/logo1.png" alt="Company Logo" style="width: 300px; margin-bottom: 20px;">
+            <p style="background-color: rgba(218, 119, 228, 0.7);
+                      border-radius: 20px; 
+                      padding: 30px; 
+                      max-width: 80%;
+                      font-size: 2em;
+                      line-height: 1.4;">
+                From corner offices to cozy homes, we perfect every view.
+            </p>
+        </div>
+    </div>
+    <div id="about-us" class="section">
+        <div>
+            <h1>About Us</h1>
+            <p>Learn more about our company and our mission.</p>
+        </div>
+    </div>
+
+    <div id="services" class="section">
+        <div>
+            <h1>Services</h1>
+            <p>I offer things.</p>
+        </div>
+    </div>
+
+    <div id="gallery" class="section">
+        <div>
+            
+            <h1>Before and Afters</h1>
+            <p>Call us to make your home POP, like these below!</p>
+            <div class="gallery-container">
+                <div class="gallery-row">
+                    <div class="gallery-item" style="background-image: url('img/b41.jpg');"></div>
+                    <div class="gallery-item" style="background-image: url('img/af1.jpg');"></div>
+                </div>
+                <div class="gallery-row">
+                    <div class="gallery-item" style="background-image: url('img/HGH_0450.jpg');"></div>
+                    <div class="gallery-item" style="background-image: url('img/new_image.jpg');"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact-us" class="section">
+        <div>
+            <h1>Contact Us</h1>
+            <form id="contact-form" action="https://formspree.io/f/huroth15@gmail.com" method="POST">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="note" placeholder="Note (50 word limit)" maxlength="250" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <script>
+       const sections = document.querySelectorAll('.section');
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: buildThresholdList()
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const ratio = entry.intersectionRatio;
+            entry.target.style.opacity = ratio;
+        }
+    });
+}, observerOptions);
+
+sections.forEach(section => {
+    observer.observe(section);
+});
+
+function buildThresholdList() {
+    let thresholds = [];
+    for (let i = 0; i <= 100; i++) {
+        thresholds.push(i / 100);
+    }
+    return thresholds;
+}
+</script>
+    
+</body>
+</html>
