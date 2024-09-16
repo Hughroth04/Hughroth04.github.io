@@ -1,4 +1,4 @@
-<!DO<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +18,13 @@
         padding: 60px 20px;
         box-sizing: border-box;
         overflow: hidden;
+        position: relative;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .section.active {
+        opacity: 1;
     }
 
     .section::before {
@@ -40,81 +47,118 @@
         z-index: 2;
     }
 
-
-.section > div {
-    position: relative;
-    z-index: 2;
-}
-
-#home {
+    #home {
         background-image: url('img/windowstock.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+
+    #home::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 182, 193, 0.3); /* Light pink overlay */
+        z-index: 1;
+    }
+
+    #home {
+        background-image: url('img/windowstock.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .logo {
+        width: 300px;
+        margin-bottom: 20px;
+    }
+
+    .tagline {
+        background-color: rgba(218, 119, 228, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 80%;
+        font-size: 2em;
+        line-height: 1.4;
+        color: white;
+    }
+
+    #services, #gallery, #contact-us {
+        background-color: #FFB6C1; /* Light pink */
+    }
+
+    #about-us {
+        background-color: #FFB6C1;
+    }
+
+    #services {
+        background-color: #FFB6C1;
+    }
+
+    #gallery {
+        background-color: #FFB6C1;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    p {
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .gallery-item {
+        display: inline-block;
+        margin: 10px;
+        width: 350px;
+        height: 2px;
+        background-color: #da77e4;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .gallery-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .gallery-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .gallery-item {
+        width: 350px;
+        height: 250px;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
 
-    #services {
-        background-color: #FFB6C1; /* Light pink - original section color */
-    }
-
-    #gallery {
-        background-color: #FFB6C1;
-    }
-       
-        
-    #about-us {
-        background-color: #FFB6C1;
-}
-
-        #services {
-            background-color: #FFB6C1;
-        }
-
-        #gallery {
-            background-color: #FFB6C1;
-            text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        p {
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .gallery-item {
-            display: inline-block;
-            margin: 10px;
-            width: 350px;
-            height: 2px;
-            background-color: #da77e4;
-            background-size: cover;
-            background-position: center;
-        
-        }
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .gallery-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .gallery-item {
-            width: 350px;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .nav-container {
+    .nav-container {
         position: fixed;
         top: 20px;
         left: 20px;
@@ -149,6 +193,7 @@
         background-color: rgba(218, 119, 228, 0.7);
         border-radius: 5px;
     }
+
     .hamburger span {
         background-color: white;
         height: 3px;
@@ -187,19 +232,18 @@
         }
 
         .gallery-row {
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
 
         .gallery-item {
-            width: 100%;
+            width: calc(50% - 10px);
             height: 0;
-            padding-bottom: 75%; /* Adjust this value to change the aspect ratio */
-            margin-bottom: 20px;
+            padding-bottom: calc(50% - 10px);
         }
     }
 
-        #contact-form {
+    #contact-form {
         background-color: rgba(173, 216, 230, 0.5); /* Light blue with 50% opacity */
         padding: 20px;
         border-radius: 10px;
@@ -235,6 +279,7 @@
     #contact-form button:hover {
         background-color: #45a049;
     }
+
     .centered {
         text-align: center;
     }
@@ -266,6 +311,7 @@
         margin-bottom: 15px;
         text-align: center;
     }
+
     .service-list {
         list-style-type: none;
         padding: 0;
@@ -298,40 +344,33 @@
             flex-basis: 100%;
         }
     }
-    </style>
+</style>
 </head>
 <body>
-   <div class="nav-container">
-    <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="nav-container">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-bar">
+            <a href="#home">Home</a>
+            <a href="#about-us">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact-us">Contact Us</a>
+        </nav>
     </div>
-    <nav class="nav-bar">
-        <a href="#home">Home</a>
-        <a href="#about-us">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact-us">Contact Us</a>
-    </nav>
-</div>
-    </style>
-</head>
-<body>
 
     <div id="home" class="section active">
-        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-            <img src="img/logo1.png" alt="Company Logo" style="width: 300px; margin-bottom: 20px;">
-            <p style="background-color: rgba(218, 119, 228, 0.7);
-                      border-radius: 20px; 
-                      padding: 30px; 
-                      max-width: 80%;
-                      font-size: 2em;
-                      line-height: 1.4;">
+        <div class="home-content">
+            <img src="img/logo1.png" alt="Company Logo" class="logo">
+            <p class="tagline">
                 From corner offices to cozy homes, we perfect every view.
             </p>
         </div>
     </div>
+
     <div id="about-us" class="section">
         <div>
             <h1>About Us</h1>
@@ -372,7 +411,6 @@
 
     <div id="gallery" class="section">
         <div>
-            
             <h1>Before and Afters</h1>
             <p>Call us to make your home POP, like these below!</p>
             <div class="gallery-container">
@@ -387,6 +425,7 @@
             </div>
         </div>
     </div>
+
     <div id="contact-us" class="section">
         <div>
             <h1>Contact Us</h1>
@@ -399,37 +438,65 @@
             </form>
         </div>
     </div>
+
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.querySelector('.hamburger');
-        const navBar = document.querySelector('.nav-bar');
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const windowHeight = window.innerHeight;
 
-        hamburger.addEventListener('click', function() {
-            navBar.classList.toggle('active');
-        });
+            function checkSections() {
+                const scrollPosition = window.scrollY;
 
-        // Close menu when a link is clicked
-        document.querySelectorAll('.nav-bar a').forEach(link => {
-            link.addEventListener('click', () => {
-                navBar.classList.remove('active');
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+
+                    if (scrollPosition > sectionTop - windowHeight / 2 && 
+                        scrollPosition < sectionTop + sectionHeight - windowHeight / 2) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', checkSections);
+            window.addEventListener('resize', () => {
+                windowHeight = window.innerHeight;
+                checkSections();
+            });
+            
+            // Initial check to activate the first visible section
+            checkSections();
+
+            const hamburger = document.querySelector('.hamburger');
+            const navBar = document.querySelector('.nav-bar');
+
+            hamburger.addEventListener('click', function() {
+                navBar.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-bar a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navBar.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    });
-</script>
-    
+    </script>
 </body>
 </html>
