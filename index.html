@@ -269,12 +269,12 @@
             font-size: 1em;
             position: absolute;
             right: 0;
-            top: 0;
-            height: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 100px;
             width: 60px;
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            transform: rotate(180deg);
             transition: right 0.3s ease-in-out;
             z-index: 10;
         }
@@ -358,19 +358,35 @@
                 padding: 20px;
             }
 
-            /* Fix "Our Story" button text orientation on mobile */
+            /* New circular button style for mobile */
             .story-btn {
-                transform: rotate(0deg) !important;
-                writing-mode: horizontal-tb !important;
-                width: 100% !important;
-                height: 60px !important;
-                bottom: 0 !important;
-                top: auto !important;
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                right: 20px;
+                top: 20px;
+                transform: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8em;
+                padding: 0;
+            }
+
+            .story-btn span {
+                display: none;
+            }
+
+            .story-btn::before {
+                content: "?";
+                font-size: 1.5em;
             }
 
             /* Adjust story section for mobile */
             .story-section {
-                padding-bottom: 60px;
+                padding-bottom: 0;
             }
 
             .story-content {
@@ -457,7 +473,7 @@
             </div>
         </div>
         
-        <button id="our-story-btn" class="story-btn">Our Story</button>
+        <button id="our-story-btn" class="story-btn"><span>Our Story</span></button>
     </div>
     
     <div id="services" class="section">
@@ -581,13 +597,17 @@
             ourStoryBtn.addEventListener('click', function() {
                 storySection.classList.add('active');
                 aboutContent.classList.add('shifted');
-                ourStoryBtn.classList.add('shifted');
+                if (window.innerWidth > 768) {
+                    ourStoryBtn.classList.add('shifted');
+                }
             });
 
             closeStoryBtn.addEventListener('click', function() {
                 storySection.classList.remove('active');
                 aboutContent.classList.remove('shifted');
-                ourStoryBtn.classList.remove('shifted');
+                if (window.innerWidth > 768) {
+                    ourStoryBtn.classList.remove('shifted');
+                }
             });
 
             // Add this to the DOMContentLoaded event listener
@@ -608,5 +628,4 @@
         });
     </script>
 </body>
-</html>
 </html>
