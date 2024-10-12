@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>ForeverClear Services</title>
     <style>
        body, html {
         margin: 0;
@@ -14,13 +14,17 @@
     }
 
     .section {
+        min-height: 100vh;
+        padding: 60px 20px;
+        box-sizing: border-box;
+        overflow: hidden;
         position: relative;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.2s ease-in-out;
         opacity: 0;  /* Start invisible */
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .section.active {
+        opacity: 1;
     }
 
     .section::before {
@@ -48,10 +52,43 @@
         background-size: cover; /* Cover the entire section */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Prevent the image from repeating */
-        min-height: 100vh; /* Ensure the section takes up the full viewport height */
+        position: relative;
         display: flex; /* Use flexbox to center content */
         justify-content: center; /* Center horizontally */
         align-items: center; /* Center vertically */
+    }
+
+    #home::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 182, 193, 0.3);
+        z-index: 1;
+    }
+
+    .home-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .logo {
+        width: 300px;
+        margin-bottom: 20px;
+    }
+
+    .tagline {
+        background-color: rgba(218, 119, 228, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 80%;
+        font-size: 2em;
+        line-height: 
     }
 
     #services {
@@ -172,6 +209,177 @@
     #contact-form button:hover {
         background-color: #45a049;
     }
+
+    .story-btn {
+        background-color: rgba(218, 119, 228, 0.7);
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 1em;
+        border-radius: 50%; /* Make it circular */
+        width: 60px; /* Adjust size */
+        height: 60px; /* Adjust size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+        margin: 20px auto; /* Center the button with auto margins */
+        /* Remove absolute positioning */
+    }
+
+    .story-btn:hover {
+        background-color: rgba(218, 119, 228, 1);
+    }
+
+    .story-section {
+        position: fixed; /* Change to fixed to cover the entire viewport */
+        top: 0;
+        right: -100%; /* Start off-screen */
+        width: 100%;
+        height: 100vh; /* Cover the entire height of the viewport */
+        background-color: rgba(218, 119, 228, 0.9);
+        overflow-y: auto;
+        transition: right 0.3s ease-in-out;
+        z-index: 5;
+    }
+
+    .story-section.active {
+        right: 0; /* Slide in */
+    }
+
+    .story-content {
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .close-btn {
+        background-color: white;
+        border: none;
+        color: rgba(218, 119, 228, 0.7);
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5em;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 15;
+    }
+
+    .service-container {
+        display: flex;
+        justify-content: space-between; /* Aligns the blocks side by side */
+        flex-wrap: wrap; /* Allows wrapping for mobile view */
+        margin-top: 20px; /* Space above the service blocks */
+    }
+
+    .service-block {
+        background-color: rgba(255, 105, 180, 0.75); /* Darker pink with 75% opacity */
+        padding: 20px;
+        margin: 10px; /* Space between blocks */
+        flex: 1; /* Allows blocks to grow equally */
+        min-width: 250px; /* Minimum width for each block */
+        text-align: center; /* Center text */
+        border-radius: 10px; /* Rounded corners */
+    }
+
+    h1, h2 {
+        text-align: center; /* Center the text for all headers */
+    }
+
+    .about-content p,
+    #services p,
+    #gallery p,
+    #contact-us p,
+    section p { /* This will target all paragraphs in any section */
+        text-align: center; /* Center the text for body paragraphs */
+        margin: 0 auto; /* Optional: Center block elements */
+        display: block; /* Ensure paragraphs are block elements */
+    }
+
+    .story-image {
+        width: 300px; 
+        height: auto; /* Maintain aspect ratio */
+        margin: 20px; /* Space off the sides */
+        position: absolute; /* Position it in the top left */
+        top: 20px; /* Space from the top */
+        left: 20px; /* Space from the left */
+        z-index: 10; /* Ensure it appears above other content */
+        border-radius: 15px; /* Round the corners */
+        overflow: hidden; /* Ensure the corners are rounded */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for depth */
+    }
+
+    /* Fading effect using a pseudo-element */
+    .story-content {
+        position: relative; /* Ensure the pseudo-element is positioned correctly */
+    }
+
+    .story-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%); 
+        /* Fade effect */
+        border-radius: 15px; /* Match the image border radius */
+        z-index: 5; /* Place it below the text */
+    }
+
+    .story-content img {
+        max-width: 100%; /* Ensure images are responsive */
+        height: auto; /* Maintain aspect ratio */
+        z-index: 10; /* Ensure images appear above the fading effect */
+    }
+
+    .story-content p {
+        margin: 20px 10px; /* Adjust margins as needed */
+        padding: 10px; /* Optional: Add padding for spacing */
+        position: relative; /* Allows for positioning adjustments */
+        z-index: 10; /* Ensure text is above the fading effect */
+        font-size: 18px; /* Increase font size (adjust as needed) */
+    }
+
+    .story-text {
+        margin: 20px; /* Adjust the margin as needed */
+        padding: 10px; /* Optional: Add padding for spacing */
+        position: relative; /* Allows for positioning adjustments */
+        left: 65px; /* Move text to the right */
+        top: -10px; /* Move text up */
+    }
+
+    .bottom-right-image {
+        width: 300px; /* Set the width to a medium size */
+        height: auto; /* Maintain aspect ratio */
+        position: absolute; /* Position it absolutely within the story-content */
+        bottom: 70px; /* Space from the bottom */
+        right: 70px; /* Space from the right */
+        z-index: 10; /* Ensure it appears above other content */
+        border-radius: 15px; /* Round the corners */
+    }
+
+    .additional-images {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: flex-start; /* Align images to the right */
+        margin-top: 20px; /* Space above the additional images */
+        gap: 15px; /* Space between the images */
+        width: 100%; /* Ensure it takes the full width of the container */
+    }
+
+    .additional-image {
+        width: 300px; /* Set a fixed width for the additional images */
+        height: 300px; /* Set a fixed height for the additional images to make them square */
+        border-radius: 10px; /* Optional: Round the corners */
+        object-fit: cover; /* Crop the images to fit the square */
+        z-index: 10; /* Ensure additional images appear above the fading effect */
+    }
     </style>
 </head>
 <body>
@@ -189,16 +397,64 @@
         </div>
     </div>
     <div id="about-us" class="section">
-        <div>
+        <div class="about-content">
             <h1>About Us</h1>
-            <p>Learn more about our company and our mission.</p>
+            <p>We are a faith-driven home service business 
+                specializing in window cleaning and gutter cleaning,
+                serving the great region of East Texas. Click the button below to learn more!
+            </p>
+            <button id="our-story-btn" class="story-btn">Our Story</button> <!-- Circular button -->
+        </div>
+        
+        <div id="our-story-section" class="story-section">
+            <div class="story-content">
+                <img src="img/Squeeg1.jpg" alt="Our Story Image" class="story-image"> <!-- Existing image -->
+                <button id="close-story-btn" class="close-btn">&times;</button>
+                <h2>Our Story</h2>
+                <p>Owner, Hugh Roth started this business in 2023 all the way down in Houston, 
+                    Texas. When moving to Henderson to continue his studies, he brought ForeverClear 
+                    with him and is now happily serving the surrounding areas. Believe it or not, the 
+                    business only started because Hugh came up with a catchy name that he claims would be 
+                    "a waste of creativity if not used." We have a passion for what we do, and we take pride in
+                    what we do, but the only reason we can deliver a job well done is because of the drive that Christ
+                    gives us to work hard for the glory of His name. We firmly believe that work is worship, and God
+                    deserves worship without blemish, so that is what we strive for. Some fun facts about Hugh include that he
+                loves birds, photography, the beach, has a love for learning, and an even deeper love for our saviour Jesus Christ.
+                Some of his work is displayed below, you can also check out his website at <a href="https://hughroth.com/" target="_blank">hughroth.com</a>.</p>
+                <img src="img/victory1.jpg" alt="Additional Story Image" class="bottom-right-image"> <!-- New image -->
+                <div class="additional-images">
+                    <img src="img/surf1.jpg" alt="Photo 1" class="additional-image">
+                    <img src="img/artsy.jpg" alt="Photo 2" class="additional-image">
+                    <img src="img/brd1.jpg" alt="Photo 3" class="additional-image">
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="services" class="section">
         <div>
             <h1>Services</h1>
-            <p>I offer things.</p>
+            <p></p>
+        </div>
+        <!-- Add the new service blocks here -->
+        <div class="service-container">
+            <div class="service-block">
+                <h2>Where?</h2>
+                <p>Our home office is in Henderson, TX but we serve the entire surrounding region.</p>
+            </div>
+            <div class="service-block">
+                <h2>What We Offer</h2>
+                <p>We offer top notch window cleaning which includes the glass, frames, sills, and screens. 
+                    We offer gutter clearing and cleaning as an add on as well.</p>
+            </div>
+            <div class="service-block">
+                <h2>Why Choose Us?</h2>
+                <p>We use an authentic in house solution covering everything window related, and when you choose us,
+                     you are not only supporting a local business, 
+                     but also a business owned and operated by seminary students. 
+
+                </p>
+            </div>
         </div>
     </div>
 
@@ -206,30 +462,32 @@
         <div>
             
             <h1>Before and Afters</h1>
-            <p>Call us to make your home POP, like these below!</p>
+            <p>Call us to make your windows POP, like these below!</p>
             <div class="gallery-container">
                 <div class="gallery-row">
                     <div class="gallery-item" style="background-image: url('img/b41.jpg');"></div>
                     <div class="gallery-item" style="background-image: url('img/af1.jpg');"></div>
                 </div>
                 <div class="gallery-row">
-                    <div class="gallery-item" style="background-image: url('img/HGH_0450.jpg');"></div>
-                    <div class="gallery-item" style="background-image: url('img/new_image.jpg');"></div>
+                    <div class="gallery-item" style="background-image: url('img/ecothrift1.jpg');"></div>
+                    <div class="gallery-item" style="background-image: url('img/house1.jpg');"></div>
                 </div>
             </div>
         </div>
     </div>
     <div id="contact-us" class="section">
-        <div>
-            <h1>Contact Us</h1>
-            <form id="contact-form" action="https://formspree.io/f/huroth15@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="tel" name="phone" placeholder="Phone Number" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="note" placeholder="Note (50 word limit)" maxlength="250" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-        </div>
+        <h1>Contact Us</h1>
+        <form id="contact-form" action="https://formspree.io/f/xvgpevlo" method="POST">
+            <label>
+                Your email:
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Your message:
+                <textarea name="message" required></textarea>
+            </label>
+            <button type="submit">Send</button>
+        </form>
     </div>
     <script>
        const sections = document.querySelectorAll('.section');
@@ -261,8 +519,20 @@ function buildThresholdList() {
     return thresholds;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const ourStoryBtn = document.getElementById('our-story-btn');
+    const closeStoryBtn = document.getElementById('close-story-btn');
+    const storySection = document.getElementById('our-story-section');
+
+    ourStoryBtn.addEventListener('click', function() {
+        storySection.classList.add('active'); // Slide in the story section
+    });
+
+    closeStoryBtn.addEventListener('click', function() {
+        storySection.classList.remove('active'); // Slide out the story section
+    });
+});
 </script>
     
 </body>
 </html>
-
