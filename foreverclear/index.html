@@ -5,1401 +5,506 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ForeverClear Services</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background-color: #FFE4E1;
-        }
+       body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        background-color: #FFE4E1; /* Misty Rose - a lighter pink */
+    }
 
-        .section {
-            min-height: 100vh;
-            padding: 60px 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            position: relative;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
+    .section {
+        min-height: 100vh;
+        padding: 60px 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+        opacity: 0;  /* Start invisible */
+        transition: opacity 0.5s ease-in-out;
+    }
 
-        .section.active {
-            opacity: 1;
-        }
+    .section.active {
+        opacity: 1;
+    }
 
-        .nav-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
+    .section::before {
+        content: '';
+        position: absolute;
+        top: -50vh;
+        left: 0;
+        right: 0;
+        bottom: -50vh;
+        background: linear-gradient(to bottom, 
+            rgba(255, 182, 193, 0) 0%,
+            rgba(255, 182, 193, 0.5) 50%,
+            rgba(255, 182, 193, 0) 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
 
-        .nav-bar {
-            display: flex;
-            flex-direction: column;
-        }
+    .section > div {
+        position: relative;
+        z-index: 2;
+    }
 
-        .nav-bar a {
-            display: block;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            background-color: rgba(218, 119, 228, 0.7);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+    #home {
+        background-image: url('img/backgr1.jpeg'); /* Ensure this path is correct */
+        background-size: cover; /* Cover the entire section */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        position: relative;
+        display: flex; /* Use flexbox to center content */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
 
-        .nav-bar a:hover {
-            background-color: rgba(218, 119, 228, 1);
-        }
+    #home::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 182, 193, 0.3);
+        z-index: 1;
+    }
 
-        #home {
-            background-image: url('img/windowstock.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .home-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+    }
 
-        .home-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            z-index: 2;
-        }
+    .logo {
+        width: 300px;
+        margin-bottom: 20px;
+    }
 
-        .logo {
-            width: 300px;
-            margin-bottom: 20px;
-        }
+    .tagline {
+        background-color: rgba(218, 119, 228, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 80%;
+        font-size: 2em;
+        line-height: 1.5;
+}
+    #services {
+        background-color: #FFB6C1; /* Light pink - original section color */
+    }
 
-        .tagline {
-            background-color: rgba(218, 119, 228, 0.7);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 80%;
-            font-size: 2em;
-            line-height: 1.4;
-            color: white;
-        }
+    #gallery {
+        background-color: #FFB6C1;
+    }
+        
+    #about-us {
+        background-color: #FFB6C1;
+    }
 
-        #about-us, #services, #gallery, #contact-us {
-            background-color: #FFB6C1;
-        }
+    #services {
+        background-color: #FFB6C1;
+    }
 
-        h1, h2, p {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    #gallery {
+        background-color: #FFB6C1;
+        text-align: center;
+    }
 
-        p {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    h1 {
+        margin-bottom: 20px;
+    }
 
-        .services-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 30px;
-        }
+    p {
+        max-width: 600px;
+        text-align: center;
+    }
 
-        .service-column {
-            flex: 1;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
+    .gallery-item {
+        display: inline-block;
+        margin: 10px;
+        width: 350px;
+        height: 2px;
+        background-color: #da77e4;
+        background-size: cover;
+        background-position: center;
+    }
 
-        /* Additional styles for responsiveness */
-        @media (max-width: 768px) {
-            .services-container {
-                flex-direction: column;
-            }
+    .gallery-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
 
-            .service-column {
-                margin-bottom: 30px;
-            }
-        }
+    .gallery-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .gallery-item {
+        width: 350px;
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .nav-bar {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+    }
+
+    .nav-bar a {
+        display: block;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        background-color: rgba(218, 119, 228, 0.7);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .nav-bar a:hover {
+        background-color: rgba(218, 119, 228, 1);
+    }
+
+    #contact-form {
+        background-color: rgba(173, 216, 230, 0.5); /* Light blue with 50% opacity */
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #contact-form input,
+    #contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    #contact-form textarea {
+        height: 100px;
+        resize: vertical;
+    }
+
+    #contact-form button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #contact-form button:hover {
+        background-color: #45a049;
+    }
+
+    .story-btn {
+        background-color: rgba(218, 119, 228, 0.7);
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 1em;
+        border-radius: 50%; /* Make it circular */
+        width: 60px; /* Adjust size */
+        height: 60px; /* Adjust size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+        margin: 20px auto; /* Center the button with auto margins */
+        /* Remove absolute positioning */
+    }
+
+    .story-btn:hover {
+        background-color: rgba(218, 119, 228, 1);
+    }
+
+    .story-section {
+        position: fixed; /* Change to fixed to cover the entire viewport */
+        top: 0;
+        right: -100%; /* Start off-screen */
+        width: 100%;
+        height: 100vh; /* Cover the entire height of the viewport */
+        background-color: rgba(218, 119, 228, 0.9);
+        overflow-y: auto;
+        transition: right 0.3s ease-in-out;
+        z-index: 5;
+    }
+
+    .story-section.active {
+        right: 0; /* Slide in */
+    }
+
+    .story-content {
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .close-btn {
+        background-color: white;
+        border: none;
+        color: rgba(218, 119, 228, 0.7);
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5em;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 15;
+    }
+
+    .service-container {
+        display: flex;
+        justify-content: space-between; /* Aligns the blocks side by side */
+        flex-wrap: wrap; /* Allows wrapping for mobile view */
+        margin-top: 20px; /* Space above the service blocks */
+    }
+
+    .service-block {
+        background-color: rgba(255, 182, 232, 0.842); /* Change this to a lighter pink */
+        padding: 20px;
+        margin: 10px; /* Space between blocks */
+        flex: 1; /* Allows blocks to grow equally */
+        min-width: 250px; /* Minimum width for each block */
+        text-align: center; /* Center text */
+        border-radius: 10px; /* Rounded corners */
+    }
+    
+    h1, h2 {
+        text-align: center; /* Center the text for all headers */
+    }
+
+    .about-content p,
+    #services p,
+    #gallery p,
+    #contact-us p,
+    section p { /* This will target all paragraphs in any section */
+        text-align: center; /* Center the text for body paragraphs */
+        margin: 0 auto; /* Optional: Center block elements */
+        display: block; /* Ensure paragraphs are block elements */
+    }
+
+    .story-image {
+        width: 300px; 
+        height: auto; /* Maintain aspect ratio */
+        margin: 20px; /* Space off the sides */
+        position: absolute; /* Position it in the top left */
+        top: 20px; /* Space from the top */
+        left: 20px; /* Space from the left */
+        z-index: 10; /* Ensure it appears above other content */
+        border-radius: 15px; /* Round the corners */
+        overflow: hidden; /* Ensure the corners are rounded */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for depth */
+    }
+
+    /* Fading effect using a pseudo-element */
+    .story-content {
+        position: relative; /* Ensure the pseudo-element is positioned correctly */
+    }
+
+    .story-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%); 
+        /* Fade effect */
+        border-radius: 15px; /* Match the image border radius */
+        z-index: 5; /* Place it below the text */
+    }
+
+    
+
+    .story-content p {
+        margin: 20px 10px; /* Adjust margins as needed */
+        padding: 10px; /* Optional: Add padding for spacing */
+        position: relative; /* Allows for positioning adjustments */
+        z-index: 10; /* Ensure text is above the fading effect */
+        font-size: 22px; /* Increase font size (adjust as needed) */
+    }
+
+    .story-text {
+        margin: 20px; /* Adjust the margin as needed */
+        padding: 10px; /* Optional: Add padding for spacing */
+        position: relative; /* Allows for positioning adjustments */
+        left: 65px; /* Move text to the right */
+        top: -10px; /* Move text up */
+    }
+
+
+
+    
     </style>
 </head>
 <body>
-    <div class="nav-container">
-        <nav class="nav-bar">
-            <a href="#home">Home</a>
-            <a href="#about-us">About Us</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact-us">Contact Us</a>
-        </nav>
+    <div class="nav-bar">
+        <a href="#home">Home</a>
+        <a href="#about-us">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact-us">Contact Us</a>
     </div>
-
     <div id="home" class="section active">
         <div class="home-content">
             <img src="img/logo1.png" alt="Company Logo" class="logo">
             <p class="tagline">From corner offices to cozy homes, we perfect every view.</p>
         </div>
     </div>
-
-    <div id="about-us" class="section">
-        <div class="about-content">
-            <h1>About Us</h1>
-            <p>We are a faith-driven home service business specializing in window and gutter cleaning, serving the great region of East Texas.</p>
-        </div>
-    </div>
-
-    <div id="services" class="section">
-        <h1>Services</h1>
-        <div class="services-container">
-            <div class="service-column">
-                <h2 class="where">Where?</h2>
-                <ul class="service-list">
-                    <li>Henderson, TX</li>
-                    <li>Tyler, TX</li>
-                    <li>Kilgore, TX</li>
-                    <li>Longview, TX</li>
-                    <li>Marshall, TX</li>
-                    <li>Carthage, TX</li>
-                    <li>Mt. Enterprise, TX</li>
-                    <li>Nacogdoches, TX</li>
-                    <li>And Surrounding!</li>
-                </ul>
-            </div>
-            <div class="service-column">
-                <h2>What We Offer</h2>
-                <p>Using our authentic in-house window solution, we bring clarity to your vision that ensures spot-free, streak-free windows; but we don't stop at the glass! We deep clean the panes, frames, screens, and sills. We also offer gutter cleaning and gutter guards to ensure your establishment looks newer than ever!</p>
-            </div>
-            <div class="service-column">
-                <h2>Why Choose Us?</h2>
-                <p>Windows should shine, so we have made it our mission to perfect that, even using an authentic solution made in-house. Being student-run means we understand that we don't know everything, which leads to a foundation that stands on our desire to perfect the science of window cleaning.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="gallery" class="section">
-        <h1>Before and Afters</h1>
-        <p>Call us to make your establishment POP, like these below!</p>
-        <div class="gallery-container">
-            <div class="gallery-row">
-                <div class="gallery-item" style="background-image: url('img/b41.jpg');"></div>
-                <div class="gallery-item" style="background-image: url('img/af1.jpg');"></div>
-            </div>
-            <div class="gallery-row">
-                <div class="gallery-item" style="background-image: url('img/HGH_0450.jpg');"></div>
-                <div class="gallery-item" style="background-image: url('img/new_image.jpg');"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="contact-us" class="section">
-        <h1>Contact Us</h1>
-        <form id="contact-form" action="https://formspree.io/f/huroth15@gmail.com" method="POST">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="tel" name="phone" placeholder="Phone Number" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <textarea name="note" placeholder="Note (50 word limit)" maxlength="250" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            let windowHeight = window.innerHeight;
-
-            function checkSections() {
-                const scrollPosition = window.scrollY;
-
-                sections.forEach((section) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-
-                    if (scrollPosition >= sectionTop - windowHeight / 2 && 
-                        scrollPosition < sectionTop + sectionHeight - windowHeight / 2) {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', checkSections);
-            window.addEventListener('resize', () => {
-                windowHeight = window.innerHeight;
-                checkSections();
-            });
-
-            checkSections(); // Initial check
-        });
-    </script>
-</body>
-</html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ForeverClear Services</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background-color: #FFE4E1;
-        }
-
-        .section {
-            min-height: 100vh;
-            padding: 60px 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            position: relative;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .section.active {
-            opacity: 1;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: -50vh;
-            left: 0;
-            right: 0;
-            bottom: -50vh;
-            background: linear-gradient(to bottom, 
-                rgba(255, 182, 193, 0) 0%,
-                rgba(255, 182, 193, 0.5) 50%,
-                rgba(255, 182, 193, 0) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .section > div {
-            position: relative;
-            z-index: 2;
-        }
-
-        #home {
-            background-image: url('img/windowstock.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #home::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 182, 193, 0.3);
-            z-index: 1;
-        }
-
-        .home-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .logo {
-            width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .tagline {
-            background-color: rgba(218, 119, 228, 0.7);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 80%;
-            font-size: 2em;
-            line-height: 1.4;
-            color: white;
-        }
-
-        #services, #gallery, #contact-us, #about-us {
-            background-color: #FFB6C1;
-        }
-
-        h1, h2, p {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        p {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .gallery-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .gallery-item {
-            width: 350px;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .nav-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-
-        .nav-bar {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .nav-bar a {
-            display: block;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            background-color: rgba(218, 119, 228, 0.7);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .nav-bar a:hover {
-            background-color: rgba(218, 119, 228, 1);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 10px;
-            background-color: rgba(218, 119, 228, 0.7);
-            border-radius: 5px;
-        }
-
-        .hamburger span {
-            background-color: white;
-            height: 3px;
-            width: 25px;
-            margin: 2px 0;
-            transition: 0.4s;
-        }
-
-        #contact-form {
-            background-color: rgba(173, 216, 230, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        #contact-form input,
-        #contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        #contact-form textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        #contact-form button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #contact-form button:hover {
-            background-color: #45a049;
-        }
-
-        .services-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .service-column {
-            flex: 1;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .where {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-
-        .service-list {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        .service-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .service-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #333;
-        }
-
-        #about-us {
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-        }
-
-        .about-content {
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            padding: 20px;
-            opacity: 1;
-        }
-
-        .about-content.shifted {
-            transform: translateX(-60px);
-            opacity: 0;
-        }
-
-        .story-btn {
-            background-color: rgba(218, 119, 228, 0.7);
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1em;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 100px;
-            width: 60px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transition: right 0.3s ease-in-out;
-            z-index: 10;
-        }
-
-        .story-section {
-            position: absolute;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(218, 119, 228, 0.7);
-            overflow-y: auto;
-            transition: right 0.3s ease-in-out;
-            z-index: 5;
-        }
-
-        .story-section.active {
-            right: 0;
-        }
-
-        .story-content {
-            padding: 20px;
-            box-sizing: border-box;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .story-image {
-            width: 15%;
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            background-color: white;
-            border: none;
-            color: rgba(218, 119, 228, 0.7);
-            padding: 10px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5em;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 15;
-        }
-
-        .story-section h2,
-        .story-section p {
-            color: white;
-        }
-
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            /* Increase text size for better readability on mobile */
-            body {
-                font-size: 18px;
-            }
-
-            /* Adjust home page content for mobile */
-            .home-content {
-                width: 90%;
-                margin: 0 auto;
-            }
-
-            .logo {
-                width: 80%;
-                max-width: 250px;
-            }
-
-            .tagline {
-                font-size: 1.5em;
-                padding: 20px;
-            }
-
-            /* New circular button style for mobile */
-            .story-btn {
-                writing-mode: horizontal-tb;
-                text-orientation: mixed;
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                right: 20px;
-                top: 20px;
-                transform: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.8em;
-                padding: 0;
-            }
-
-            .story-btn span {
-                display: block;
-                font-size: 0.8em;
-                text-align: center;
-            }
-
-            .story-btn::before {
-                content: none;
-            }
-
-            /* Adjust story section for mobile */
-            .story-section {
-                padding-bottom: 60px;
-            }
-
-            .story-content {
-                padding: 40px 20px;
-                text-align: center;
-            }
-
-            .story-image {
-                width: 50%;
-                max-width: 200px;
-                margin: 0 auto 20px;
-            }
-
-            .story-content h2 {
-                margin-top: 0;
-            }
-
-            .story-content p {
-                margin-bottom: 20px;
-            }
-
-            .close-btn {
-                top: 20px;
-                right: 20px;
-            }
-
-            /* Improve services section layout on mobile */
-            .services-container {
-                flex-direction: column;
-            }
-
-            .service-column {
-                margin-bottom: 30px;
-            }
-
-            /* Adjust gallery for mobile */
-            .gallery-item {
-                width: 100%;
-                height: 200px;
-                margin-bottom: 20px;
-            }
-
-            /* Improve contact form on mobile */
-            #contact-form {
-                width: 90%;
-            }
-
-            #contact-form input,
-            #contact-form textarea {
-                font-size: 16px;
-                padding: 12px;
-            }
-
-            #contact-form button {
-                font-size: 18px;
-                padding: 12px 24px;
-            }
-
-            /* Ensure the content doesn't bleed into the next section */
-            #about-us {
-                padding-bottom: 80px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="nav-container">
-        <nav class="nav-bar">
-            <a href="#home">Home</a>
-            <a href="#about-us">About Us</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact-us">Contact Us</a>
-        </nav>
-    </div>
-
-    <div id="home" class="section active">
-        <div class="home-content">
-            <img src="img/logo1.png" alt="Company Logo" class="logo">
-            <p class="tagline">From corner offices to cozy homes, we perfect every view.</p>
-        </div>
-    </div>
-
-    <div id="about-us" class="section">
-        <div class="about-content">
-            <h1>About Us</h1>
-            <p>We are a faith-driven home service business specializing in window and gutter cleaning, serving the great region of East Texas.</p>
-        </div>
-    </div>
-
-    <div id="services" class="section">
-        <h1>Services</h1>
-        <div class="services-container">
-            <div class="service-column">
-                <h2 class="where">Where?</h2>
-                <ul class="service-list">
-                    <li>Henderson, TX</li>
-                    <li>Tyler, TX</li>
-                    <li>Kilgore, TX</li>
-                    <li>Longview, TX</li>
-                    <li>Marshall, TX</li>
-                    <li>Carthage, TX</li>
-                    <li>Mt. Enterprise, TX</li>
-                    <li>Nacogdoches, TX</li>
-                    <li>And Surrounding!</li>
-                </ul>
-            </div>
-            <div class="service-column">
-                <h2>What We Offer</h2>
-                <p>Using our authentic in-house window solution, we bring clarity to your vision that ensures spot-free, streak-free windows; but we don't stop at the glass! We deep clean the panes, frames, screens, and sills. We also offer gutter cleaning and gutter guards to ensure your establishment looks newer than ever!</p>
-            </div>
-            <div class="service-column">
-                <h2>Why Choose Us?</h2>
-                <p>Windows should shine, so we have made it our mission to perfect that, even using an authentic solution made in-house. Being student-run means we understand that we don't know everything, which leads to a foundation that stands on our desire to perfect the science of window cleaning.</p>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ForeverClear Services</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background-color: #FFE4E1;
-        }
-
-        .section {
-            min-height: 100vh;
-            padding: 60px 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            position: relative;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .section.active {
-            opacity: 1;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: -50vh;
-            left: 0;
-            right: 0;
-            bottom: -50vh;
-            background: linear-gradient(to bottom, 
-                rgba(255, 182, 193, 0) 0%,
-                rgba(255, 182, 193, 0.5) 50%,
-                rgba(255, 182, 193, 0) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .section > div {
-            position: relative;
-            z-index: 2;
-        }
-
-        #home {
-            background-image: url('img/windowstock.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #home::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 182, 193, 0.3);
-            z-index: 1;
-        }
-
-        .home-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .logo {
-            width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .tagline {
-            background-color: rgba(218, 119, 228, 0.7);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 80%;
-            font-size: 2em;
-            line-height: 1.4;
-            color: white;
-        }
-
-        #services, #gallery, #contact-us, #about-us {
-            background-color: #FFB6C1;
-        }
-
-        h1, h2, p {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        p {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .gallery-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .gallery-item {
-            width: 350px;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .nav-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-
-        .nav-bar {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .nav-bar a {
-            display: block;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            background-color: rgba(218, 119, 228, 0.7);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .nav-bar a:hover {
-            background-color: rgba(218, 119, 228, 1);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 10px;
-            background-color: rgba(218, 119, 228, 0.7);
-            border-radius: 5px;
-        }
-
-        .hamburger span {
-            background-color: white;
-            height: 3px;
-            width: 25px;
-            margin: 2px 0;
-            transition: 0.4s;
-        }
-
-        #contact-form {
-            background-color: rgba(173, 216, 230, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        #contact-form input,
-        #contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        #contact-form textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        #contact-form button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #contact-form button:hover {
-            background-color: #45a049;
-        }
-
-        .services-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .service-column {
-            flex: 1;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .where {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-
-        .service-list {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        .service-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .service-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #333;
-        }
-
-        #about-us {
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-        }
-
-        .about-content {
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            padding: 20px;
-            opacity: 1;
-        }
-
-        .about-content.shifted {
-            transform: translateX(-60px);
-            opacity: 0;
-        }
-
-        .story-btn {
-            background-color: rgba(218, 119, 228, 0.7);
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1em;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 100px;
-            width: 60px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transition: right 0.3s ease-in-out;
-            z-index: 10;
-        }
-
-        .story-section {
-            position: absolute;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(218, 119, 228, 0.7);
-            overflow-y: auto;
-            transition: right 0.3s ease-in-out;
-            z-index: 5;
-        }
-
-        .story-section.active {
-            right: 0;
-        }
-
-        .story-content {
-            padding: 20px;
-            box-sizing: border-box;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .story-image {
-            width: 15%;
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            background-color: white;
-            border: none;
-            color: rgba(218, 119, 228, 0.7);
-            padding: 10px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5em;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 15;
-        }
-
-        .story-section h2,
-        .story-section p {
-            color: white;
-        }
-
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            /* Increase text size for better readability on mobile */
-            body {
-                font-size: 18px;
-            }
-
-            /* Adjust home page content for mobile */
-            .home-content {
-                width: 90%;
-                margin: 0 auto;
-            }
-
-            .logo {
-                width: 80%;
-                max-width: 250px;
-            }
-
-            .tagline {
-                font-size: 1.5em;
-                padding: 20px;
-            }
-
-            /* New circular button style for mobile */
-            .story-btn {
-                writing-mode: horizontal-tb;
-                text-orientation: mixed;
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                right: 20px;
-                top: 20px;
-                transform: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.8em;
-                padding: 0;
-            }
-
-            .story-btn span {
-                display: block;
-                font-size: 0.8em;
-                text-align: center;
-            }
-
-            .story-btn::before {
-                content: none;
-            }
-
-            /* Adjust story section for mobile */
-            .story-section {
-                padding-bottom: 60px;
-            }
-
-            .story-content {
-                padding: 40px 20px;
-                text-align: center;
-            }
-
-            .story-image {
-                width: 50%;
-                max-width: 200px;
-                margin: 0 auto 20px;
-            }
-
-            .story-content h2 {
-                margin-top: 0;
-            }
-
-            .story-content p {
-                margin-bottom: 20px;
-            }
-
-            .close-btn {
-                top: 20px;
-                right: 20px;
-            }
-
-            /* Improve services section layout on mobile */
-            .services-container {
-                flex-direction: column;
-            }
-
-            .service-column {
-                margin-bottom: 30px;
-            }
-
-            /* Adjust gallery for mobile */
-            .gallery-item {
-                width: 100%;
-                height: 200px;
-                margin-bottom: 20px;
-            }
-
-            /* Improve contact form on mobile */
-            #contact-form {
-                width: 90%;
-            }
-
-            #contact-form input,
-            #contact-form textarea {
-                font-size: 16px;
-                padding: 12px;
-            }
-
-            #contact-form button {
-                font-size: 18px;
-                padding: 12px 24px;
-            }
-
-            /* Ensure the content doesn't bleed into the next section */
-            #about-us {
-                padding-bottom: 80px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="nav-container">
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <nav class="nav-bar">
-            <a href="#home">Home</a>
-            <a href="#about-us">About Us</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact-us">Contact Us</a>
-        </nav>
-    </div>
-
-    <div id="home" class="section active">
-        <div class="home-content">
-            <img src="img/logo1.png" alt="Company Logo" class="logo">
-            <p class="tagline">
-                From corner offices to cozy homes, we perfect every view.
-            </p>
-        </div>
-    </div>
-
     <div id="about-us" class="section">
         <div class="about-content">
             <h1>About Us</h1>
             <p>We are a faith-driven home service business 
                 specializing in window cleaning and gutter cleaning,
-                serving the great region of East Texas. </p>
+                serving the great region of East Texas. Click the button below to learn more!
+            </p>
+            <button id="our-story-btn" class="story-btn">Our Story</button> <!-- Circular button -->
         </div>
         
         <div id="our-story-section" class="story-section">
             <div class="story-content">
                 <button id="close-story-btn" class="close-btn">&times;</button>
                 <h2>Our Story</h2>
-                <img src="img/Jasonsquee.jpg" alt="Our Story" class="story-image">
-                <p> Owner, Hugh Roth started this business in 2023 all the way down in 
-                    Houston Texas. When moving to Henderson to continue his studies, 
-                    he brought ForeverClear with him and is now happily serving the 
-                    surrounding areas. Believe it or not, the business only started
-                    because Hugh came up with a catchy name that he claims would be
-                     "a waste of creativity if not used".
+                <p>Owner, Hugh Roth started this business in 2023 all the way down in Houston, 
+                    Texas. When moving to Henderson to continue his studies, he brought ForeverClear 
+                    with him and is now happily serving the surrounding areas. Believe it or not, the 
+                    business only started because Hugh came up with a catchy name that he claims would be 
+                    "a waste of creativity if not used." We have a passion for what we do, and we take pride in
+                    what we do, but the only reason we can deliver a job well done is because of the drive that Christ
+                    gives us to work hard for the glory of His name. We firmly believe that work is worship, and God
+                    deserves worship without blemish, so that is what we strive for. Some fun facts about Hugh include that he
+                loves birds, photography, the beach, has a love for learning, and an even deeper love for our saviour Jesus Christ.
+                You can also check out his website at 
+                <a href="https://hughroth.com/" target="_blank">hughroth.com</a>.</p>
+               
+                </div>
             </div>
         </div>
-        
-        <button id="our-story-btn" class="story-btn"><span>Our Story</span></button>
     </div>
-    
+
     <div id="services" class="section">
-        <h1>Services</h1>
-        <div class="services-container">
-            <div class="service-column">
-                <h2 class="where">Where?</h2>
-                <ul class="service-list">
-                    <li>Henderson, TX</li>
-                    <li>Tyler, TX</li>
-                    <li>Kilgore, TX</li>
-                    <li>Longview, TX</li>
-                    <li>Marshall, TX</li>
-                    <li>Carthage, TX</li>
-                    <li>Mt. Enterprise, TX</li>
-                    <li>Nacogdoches, TX</li>
-                    <li>And Surrounding!</li>
-                </ul>
+        <div>
+            <h1>Services</h1>
+            <p></p>
+        </div>
+        <!-- Add the new service blocks here -->
+        <div class="service-container">
+            <div class="service-block">
+                <h2>Where?</h2>
+                <p>Our home office is in Henderson, TX but we serve the entire surrounding region.</p>
             </div>
-            <div class="service-column">
+            <div class="service-block">
                 <h2>What We Offer</h2>
-                <p> Using our authentic in house window solution we bring clarity to your vision
-                    that ensures spot free, streak free windows; but we dont stop at the glass!
-                    We deep clean the panes, frames, screens, and sills. We also offer gutter 
-                    cleaning, and gutter gaurds to ensure your establishment looks newer than ever!
+                <p>We offer top notch window cleaning which includes the glass, frames, sills, and screens. 
+                    We offer gutter clearing and cleaning as an add on as well.</p>
+            </div>
+            <div class="service-block">
+                <h2>Why Choose Us?</h2>
+                <p>We use an authentic in house solution covering everything window related, and when you choose us,
+                     you are not only supporting a local business, 
+                     but also a business owned and operated by seminary students. 
+
                 </p>
             </div>
-            <div class="service-column">
-                <h2>Why Choose Us?</h2>
-                <p>Windows should shine, so we have made it our mission to perfect that,
-                     even using an authentic solution made in house. Being student ran means 
-                    we understand that we dont know everything, which naturally leads to a foundation
-                that stands on our desire to perfect the science of window cleaning.</p>
-            </div>
+        </div>
+    </div>
+
     <div id="gallery" class="section">
         <div>
-            <h1>Before and Afters</h1>
-            <p>Call us to make your establishment POP, like these below!</p>
+            <h1>What to Expect</h1>
+            <p>Call us to make your windows POP, like these below!</p>
             <div class="gallery-container">
                 <div class="gallery-row">
-                    <div class="gallery-item" style="background-image: url('img/b41.jpg');"></div>
-                    <div class="gallery-item" style="background-image: url('img/af1.jpg');"></div>
+                    <div class="gallery-item" style="background-image: 
+                    url('img/bf1.jpg');"></div>
+                    <div class="gallery-item" style="background-image: 
+                    url('img/af1.jpg');"></div>
                 </div>
                 <div class="gallery-row">
-                    <div class="gallery-item" style="background-image: url('img/HGH_0450.jpg');"></div>
-                    <div class="gallery-item" style="background-image: url('img/new_image.jpg');"></div>
+                    <div class="gallery-item" style="background-image: 
+                    url('img/ecothrift.jpg');"></div>
+                    <div class="gallery-item" style="background-image: 
+                    url('img/namelater1.jpg');"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div id="contact-us" class="section">
-        <div>
-            <h1>Contact Us</h1>
-            <form id="contact-form" action="https://formspree.io/f/xvgpevlo" method="POST">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="tel" name="phone" placeholder="Phone Number" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="note" placeholder="Note (50 word limit)" maxlength="250" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-        </div>
+        <h1>Contact Us</h1>
+        <form id="contact-form" action="https://formspree.io/f/xvgpevlo" method="POST">
+            <label>
+                Your email:
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Your message:
+                <textarea name="message" required></textarea>
+            </label>
+            <button type="submit">Send</button>
+        </form>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            let windowHeight = window.innerHeight;
+       const sections = document.querySelectorAll('.section');
 
-            function checkSections() {
-                const scrollPosition = window.scrollY;
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: buildThresholdList()
+};
 
-                sections.forEach((section) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const ratio = entry.intersectionRatio;
+            entry.target.style.opacity = ratio;
+        }
+    });
+}, observerOptions);
 
-                    if (scrollPosition > sectionTop - windowHeight / 2 && 
-                        scrollPosition < sectionTop + sectionHeight - windowHeight / 2) {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
-                    }
-                });
-            }
+sections.forEach(section => {
+    observer.observe(section);
+});
 
-            window.addEventListener('scroll', checkSections);
-            window.addEventListener('resize', () => {
-                windowHeight = window.innerHeight;
-                checkSections();
-            });
-            
-            checkSections();
+function buildThresholdList() {
+    let thresholds = [];
+    for (let i = 0; i <= 100; i++) {
+        thresholds.push(i / 100);
+    }
+    return thresholds;
+}
 
-            const hamburger = document.querySelector('.hamburger');
-            const navBar = document.querySelector('.nav-bar');
+document.addEventListener('DOMContentLoaded', function() {
+    const ourStoryBtn = document.getElementById('our-story-btn');
+    const closeStoryBtn = document.getElementById('close-story-btn');
+    const storySection = document.getElementById('our-story-section');
 
-            hamburger.addEventListener('click', function() {
-                navBar.classList.toggle('active');
-            });
+    ourStoryBtn.addEventListener('click', function() {
+        storySection.classList.add('active'); // Slide in the story section
+    });
 
-            document.querySelectorAll('.nav-bar a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navBar.classList.remove('active');
-                });
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            const ourStoryBtn = document.getElementById('our-story-btn');
-            const closeStoryBtn = document.getElementById('close-story-btn');
-            const storySection = document.getElementById('our-story-section');
-            const aboutContent = document.querySelector('.about-content');
-
-            ourStoryBtn.addEventListener('click', function() {
-                storySection.classList.add('active');
-                aboutContent.classList.add('shifted');
-                if (window.innerWidth > 768) {
-                    ourStoryBtn.classList.add('shifted');
-                }
-            });
-
-            closeStoryBtn.addEventListener('click', function() {
-                storySection.classList.remove('active');
-                aboutContent.classList.remove('shifted');
-                if (window.innerWidth > 768) {
-                    ourStoryBtn.classList.remove('shifted');
-                }
-            });
-
-            // Add this to the DOMContentLoaded event listener
-            function adjustForMobile() {
-                if (window.innerWidth <= 768) {
-                    document.querySelectorAll('.gallery-row').forEach(row => {
-                        row.style.flexDirection = 'column';
-                    });
-                } else {
-                    document.querySelectorAll('.gallery-row').forEach(row => {
-                        row.style.flexDirection = 'row';
-                    });
-                }
-            }
-
-            window.addEventListener('resize', adjustForMobile);
-            adjustForMobile();
-        });
-    </script>
+    closeStoryBtn.addEventListener('click', function() {
+        storySection.classList.remove('active'); // Slide out the story section
+    });
+});
+</script>
+    
 </body>
 </html>
